@@ -3,7 +3,7 @@ resource "aws_security_group" "vault_server" {
   count = "${var.provision == "true" ? 1 : 0}"
 
   name        = "${var.name}"
-  description = "Security Group for Vault server instances"
+  description = "Security Group for ${var.name} Vault"
   vpc_id      = "${var.vpc_id}"
 
   tags {
