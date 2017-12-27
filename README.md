@@ -10,13 +10,14 @@ Creates a standard Vault server security group in AWS.
 
 ## Input Variables
 
-- `name`: [Optional] Name for resources, defaults to "vault-client-ports-aws".
+- `count`: [Optional] Module count, defaults to "1".
+- `name`: [Optional] Name for resources, defaults to "vault-server-ports-aws".
 - `vpc_id`: [Required] VPC ID to provision resources in.
 - `cidr_blocks`: [Required] CIDR blocks for Security Groups.
 
 ## Outputs
 
-- `vault_client_sg_id`: Vault server security group ID.
+- `vault_server_sg_id`: Vault server security group ID.
 
 ## Module Dependencies
 
