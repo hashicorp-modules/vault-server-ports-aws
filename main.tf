@@ -16,9 +16,7 @@ resource "aws_security_group" "vault_server" {
   description = "Security Group for ${var.name} Vault"
   vpc_id      = "${var.vpc_id}"
 
-  tags {
-    Name = "${var.name}"
-  }
+  tags = "${merge(var.tags, map("Name", format("%s", var.name)))}"
 }
 
 # Default listen port for UI and API connectivity.
