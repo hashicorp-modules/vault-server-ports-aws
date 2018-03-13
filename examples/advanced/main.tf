@@ -6,8 +6,8 @@ resource "aws_vpc" "main" {
 }
 
 module "vault_server_ports_aws" {
+  # source = "github.com/hashicorp-modules/vault-server-ports-aws?ref=f-refactor"
   source = "../../../vault-server-ports-aws"
-  # source = "git@github.com:hashicorp-modules/vault-server-ports-aws?ref=f-refactor"
 
   count       = "${var.count}"
   name        = "${var.name}"
