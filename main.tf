@@ -2,6 +2,10 @@ terraform {
   required_version = ">= 0.9.3"
 }
 
+provider "aws" {
+  version = "~> 1.12"
+}
+
 resource "aws_security_group" "vault_server" {
   count = "${var.create ? 1 : 0}"
 
@@ -15,7 +19,7 @@ resource "aws_security_group" "vault_server" {
 resource "aws_security_group_rule" "vault_client_traffic" {
   count = "${var.create ? 1 : 0}"
 
-  security_group_id = "${element(aws_security_group.vault_server.*.id, 0)}"
+  security_group_id = "${aws_security_group.vault_server.id}"
   type              = "ingress"
   protocol          = "tcp"
   from_port         = 8200
@@ -27,7 +31,7 @@ resource "aws_security_group_rule" "vault_client_traffic" {
 resource "aws_security_group_rule" "vault_cluster_traffic" {
   count = "${var.create ? 1 : 0}"
 
-  security_group_id = "${element(aws_security_group.vault_server.*.id, 0)}"
+  security_group_id = "${aws_security_group.vault_server.id}"
   type              = "ingress"
   protocol          = "tcp"
   from_port         = 8201
@@ -39,7 +43,7 @@ resource "aws_security_group_rule" "vault_cluster_traffic" {
 resource "aws_security_group_rule" "outbound_tcp" {
   count = "${var.create ? 1 : 0}"
 
-  security_group_id = "${element(aws_security_group.vault_server.*.id, 0)}"
+  security_group_id = "${aws_security_group.vault_server.id}"
   type              = "egress"
   protocol          = "tcp"
   from_port         = 0
