@@ -1,5 +1,5 @@
 module "vault_server_ports_aws" {
-  # source = "github.com/hashicorp-modules/vault-server-ports-aws?ref=f-refactor"
+  # source = "github.com/hashicorp-modules/vault-server-ports-aws"
   source = "../../../vault-server-ports-aws"
 
   create      = false
